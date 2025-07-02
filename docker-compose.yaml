@@ -1,0 +1,8 @@
+services:
+  app:
+    build: . #Build the image from Dockerfile on root of project
+    container_name: ellis-api
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/app
