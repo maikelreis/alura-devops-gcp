@@ -11,20 +11,18 @@ jobs:
   Build-Push-image:
 
     runs-on: ubuntu-latest
-    needs: Login-docker
+    
     steps:
+    
     - uses: actions/checkout@v4
     - name: Build the Docker image
       run: docker build . --file Dockerfile --tag ${GITHUB_ACTOR}/alura-devops-gcp:01
     - uses: actions/checkout@v4
-    - name: Push the Docker image
-      run: docker push ${GITHUB_ACTOR}/alura-devops-gcp:01
-
-  Login-docker:
-
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v4
     - name: Login Docker
       run: echo ${{secrets.DOCKERHUB_PASSW}} | docker login --username ${{secrets.DOCKERHUB_USER}} --password-stdin
+    - uses: actions/checkout@v4
+    - name: Push the Docker image
+      run: docker push ${GITHUB_ACTOR}/alura-devops-gcp:01
+    
+
           
